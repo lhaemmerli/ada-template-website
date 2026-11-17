@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
-description: A template website for ADA
+title: COVID-19 severity panel
+description: CITE-seq measures hundreds of surface proteins per cell, whereas conventional flow cytometry is limited to smaller panels. Using the COVID-19 CITE-seq atlas from Stephenson et al. (Nature Medicine, 2021), we aim to determine to what extent information related to disease severity can be preserved as the 192-antibody panel is progressively reduced. 
 show_downloads: True
 navigation:
   - title: Home
