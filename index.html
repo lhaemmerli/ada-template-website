@@ -1,0 +1,252 @@
+---
+layout: story
+title: Less is more · COVID-19 severity panel
+---
+
+<!-- Top bar: scroll progress + chapter navigation -->
+<div class="progress"><div class="progress__bar" id="progress-bar"></div></div>
+<nav class="chapnav" aria-label="Chapters">
+  <a href="#hero" class="chapnav__brand">Less is more</a>
+  <ol class="chapnav__list">
+    <li><a href="#ch-patient" data-nav="ch-patient"><span>01</span> Patient</a></li>
+    <li><a href="#ch-blood" data-nav="ch-blood"><span>02</span> Blood</a></li>
+    <li><a href="#ch-citeseq" data-nav="ch-citeseq"><span>03</span> CITE-seq</a></li>
+    <li><a href="#ch-data" data-nav="ch-data"><span>04</span> Data</a></li>
+    <li><a href="#ch-compress" data-nav="ch-compress"><span>05</span> Compress</a></li>
+    <li><a href="#ch-flow" data-nav="ch-flow"><span>06</span> Clinic</a></li>
+  </ol>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="hero">
+  <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero__inner">
+    <p class="eyebrow">ADA 2026 · Group 27 · A data story</p>
+    <h1 class="hero__title">Less is <em>more</em></h1>
+    <p class="hero__lead">
+      A research instrument measured <strong>192 surface proteins</strong> on every immune cell
+      of COVID-19 patients. A hospital flow cytometer can read only a handful.
+      How much of the information about disease severity survives when we shrink the panel?
+    </p>
+    <a class="hero__cue" href="#ch-patient">
+      <span>Scroll to begin</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true"><rect x="1" y="1" width="14" height="22" rx="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle class="hero__cue-dot" cx="8" cy="7" r="2" fill="currentColor"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ======================= 01 · THE PATIENT ===================== -->
+<section class="chapter" id="ch-patient" data-chapter="patient">
+  <div class="chapter__head">
+    <p class="chapter__num">01</p>
+    <h2>It starts on a hospital ward</h2>
+  </div>
+  <div class="scrolly">
+    <div class="scrolly__stage"><svg id="stage-patient" viewBox="0 0 800 600" role="img" aria-label="Patients across the COVID-19 severity spectrum"></svg></div>
+    <div class="scrolly__steps">
+      <div class="step" data-step="0">
+        <p>Spring 2020. A patient arrives with a positive SARS-CoV-2 test. Some patients recover at home; others end up in intensive care.
+        At admission, it is hard to tell which way it will go.</p>
+      </div>
+      <div class="step" data-step="1">
+        <p>Clinicians grade COVID-19 on a <strong>severity spectrum</strong>: from asymptomatic, through mild and moderate,
+        to <span class="tag tag--severe">severe</span> and <span class="tag tag--severe">critical</span>.</p>
+      </div>
+      <div class="step" data-step="2">
+        <p>We split symptomatic patients into two groups:
+        <span class="tag tag--mild">non-severe</span> (mild + moderate) and <span class="tag tag--severe">severe</span> (severe + critical).
+        Asymptomatic patients are left out of this binary task.</p>
+      </div>
+      <div class="step" data-step="3">
+        <p>We keep <strong>one initial sample per patient</strong> to avoid counting the same person twice.
+        That leaves <strong class="num">76 patients</strong>: <span class="tag tag--mild">53 non-severe</span> and <span class="tag tag--severe">23 severe</span>.</p>
+      </div>
+      <div class="step" data-step="4">
+        <p>From each of them, the study took something small but extremely informative:
+        <strong>a tube of blood</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 02 · BLOOD ============================ -->
+<section class="chapter" id="ch-blood" data-chapter="blood">
+  <div class="chapter__head">
+    <p class="chapter__num">02</p>
+    <h2>Zooming into a drop of blood</h2>
+  </div>
+  <div class="scrolly scrolly--scrub" data-scrub="blood">
+    <div class="scrolly__stage">
+      <div class="layered" id="stage-blood">
+        <canvas id="blood-canvas" aria-hidden="true"></canvas>
+        <svg id="blood-svg" viewBox="0 0 800 600" role="img" aria-label="From blood tube to individual immune cells"></svg>
+        <div class="legend" id="blood-legend"></div>
+      </div>
+    </div>
+    <div class="scrolly__steps">
+      <div class="step" data-step="0">
+        <p>The immune cells floating in the blood (<strong>PBMCs</strong>, peripheral blood mononuclear cells) are separated from red cells and plasma.</p>
+      </div>
+      <div class="step" data-step="1">
+        <p>Under the microscope, it is a crowd: T cells, B cells, NK cells, monocytes, dendritic cells…
+        They all look roughly the same: small, round, unremarkable.</p>
+      </div>
+      <div class="step" data-step="2">
+        <p>Yet each cell type, and each <em>state</em> a cell can be in (resting, activated, exhausted), shows a different
+        set of <strong>proteins on its surface</strong>.</p>
+      </div>
+      <div class="step" data-step="3">
+        <p>So let's pick one cell and look at its surface.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 03 · CITE-SEQ ========================= -->
+<section class="chapter" id="ch-citeseq" data-chapter="citeseq">
+  <div class="chapter__head">
+    <p class="chapter__num">03</p>
+    <h2>Reading the surface with CITE-seq</h2>
+  </div>
+  <div class="scrolly">
+    <div class="scrolly__stage"><svg id="stage-cite" viewBox="0 0 800 600" role="img" aria-label="Antibodies with DNA barcodes binding surface proteins on a cell membrane"></svg></div>
+    <div class="scrolly__steps">
+      <div class="step" data-step="0">
+        <p>The cell membrane is covered with proteins: <strong>CD markers</strong>. CD4 and CD8 mark helper and killer T cells, CD14 marks monocytes, CD19 marks B cells…</p>
+      </div>
+      <div class="step" data-step="1">
+        <p><strong>CITE-seq</strong> mixes the cells with a cocktail of antibodies. Each antibody grabs one specific protein.</p>
+      </div>
+      <div class="step" data-step="2">
+        <p>The trick: every antibody carries a short <strong>DNA barcode</strong>. Sequencing the barcodes tells us how much of each protein sat on that cell.
+        These are the <em>Antibody-Derived Tags</em> (ADTs).</p>
+      </div>
+      <div class="step" data-step="3">
+        <p>The study panel had <strong class="num">192 antibodies</strong>, measured on every single cell, together with the cell's full RNA profile.
+        <span class="hint">Hover a marker to inspect it.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 04 · DATA ============================= -->
+<section class="chapter" id="ch-data" data-chapter="data">
+  <div class="chapter__head">
+    <p class="chapter__num">04</p>
+    <h2>From cells to patients</h2>
+  </div>
+  <div class="scrolly">
+    <div class="scrolly__stage">
+      <div class="layered" id="stage-data">
+        <canvas id="data-canvas" aria-hidden="true"></canvas>
+        <svg id="data-svg" viewBox="0 0 800 600" role="img" aria-label="The cell by protein data matrix aggregated to patients"></svg>
+      </div>
+    </div>
+    <div class="scrolly__steps">
+      <div class="step" data-step="0">
+        <p>Repeat this for every cell from every donor in the atlas of Stephenson <em>et al.</em> (<em>Nature Medicine</em>, 2021) and you get a matrix of
+        <strong class="num" data-count="647366">647,366</strong> cells.</p>
+      </div>
+      <div class="step" data-step="1">
+        <p>Each row also holds the RNA profile: <strong class="num">24,737</strong> genes. A great deal of information, collected by an instrument no hospital routinely uses.</p>
+      </div>
+      <div class="step" data-step="2">
+        <p>Four of the 192 antibodies are <strong>isotype controls</strong>: they bind nothing human and only measure background noise. We drop them, leaving <strong class="num">188 candidate proteins</strong>.</p>
+      </div>
+      <div class="step" data-step="3">
+        <p>Finally, we summarise all the cells of each patient into one profile. That gives <strong>76 rows</strong>, each labelled
+        <span class="tag tag--mild">non-severe</span> or <span class="tag tag--severe">severe</span>, ready for a classifier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 05 · COMPRESS ========================= -->
+<section class="chapter chapter--interactive" id="ch-compress" data-chapter="compress">
+  <div class="chapter__head">
+    <p class="chapter__num">05</p>
+    <h2>How few markers do we really need?</h2>
+    <p class="chapter__dek">We train regularised logistic regressions to separate severe from non-severe patients, and progressively
+      remove proteins. Drag the slider to shrink the panel.</p>
+  </div>
+
+  <div class="compress">
+    <div class="compress__panel card">
+      <div class="compress__readout">
+        <div><span class="kpi" id="k-value">188</span><span class="kpi-label">markers in panel</span></div>
+        <div><span class="kpi kpi--sm" id="k-pct">100%</span><span class="kpi-label">of the research panel</span></div>
+        <div><span class="kpi kpi--sm" id="k-tubes">16</span><span class="kpi-label">flow tubes needed<sup>*</sup></span></div>
+      </div>
+      <input type="range" id="k-slider" min="1" max="188" value="188" step="1" aria-label="Number of markers in the panel">
+      <div class="slider-scale"><span>1</span><span>188</span></div>
+      <div class="tiles" id="tiles" aria-hidden="true"></div>
+      <p class="footnote"><sup>*</sup>Assuming 12 colours per tube, a common clinical cytometer configuration.
+        Marker order is illustrative until the final ranking is in.</p>
+    </div>
+
+    <div class="compress__chart card">
+      <div class="card__head">
+        <h3>Performance vs. panel size</h3>
+        <span class="badge badge--warn">Preliminary · P2</span>
+      </div>
+      <svg id="auroc-chart" viewBox="0 0 560 380" role="img" aria-label="AUROC versus number of markers"></svg>
+      <p class="caption">Points: cross-validated AUROC (mean ± SD) from our preliminary models.
+        L2 uses all 188 proteins; L1 picks about 21 of them on its own. The shaded band marks where the final
+        nested cross-validation curve will appear.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 06 · FLOW ============================= -->
+<section class="chapter chapter--interactive" id="ch-flow" data-chapter="flow">
+  <div class="chapter__head">
+    <p class="chapter__num">06</p>
+    <h2>Back to the clinic</h2>
+    <p class="chapter__dek">The goal: a small panel that fits on a routine flow cytometer. This is what it could look like in the lab.</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow__panel card">
+      <div class="card__head">
+        <h3>Proposed panel</h3>
+        <span class="badge">Placeholder markers</span>
+      </div>
+      <ul class="channels" id="channels"></ul>
+    </div>
+
+    <div class="flow__plot card">
+      <div class="card__head">
+        <h3>Acquisition <span class="live"><i></i>live</span></h3>
+        <div class="toggle" role="tablist" aria-label="Simulated patient">
+          <button role="tab" aria-selected="true" data-patient="mild">Non-severe</button>
+          <button role="tab" aria-selected="false" data-patient="severe">Severe</button>
+        </div>
+      </div>
+      <div class="flow__canvas-wrap">
+        <canvas id="flow-canvas" aria-label="Simulated flow cytometry dot plot"></canvas>
+        <div class="flow__axes"><span class="flow__x" id="flow-x">Marker A</span><span class="flow__y" id="flow-y">Marker B</span></div>
+        <div class="gate-readout" id="gate-readout">Gate: <strong>–</strong></div>
+      </div>
+      <p class="caption"><span class="badge badge--warn">Simulated</span> Dot plot generated in the browser for illustration.
+        It will be replaced by the markers and patterns our final model selects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OUTRO ================================ -->
+<section class="outro" id="outro">
+  <div class="outro__inner">
+    <h2>The questions we are answering</h2>
+    <div class="rq-grid">
+      <article class="rq card"><span class="rq__n">RQ1</span><h3>Panel compression</h3><p>What is the smallest set of ADT markers that separates severe from non-severe COVID-19 nearly as well as the full panel, and which markers are they?</p><span class="status">In progress</span></article>
+      <article class="rq card"><span class="rq__n">RQ2</span><h3>Specificity</h3><p>Is the signal specific to symptomatic COVID-19, or does it also show up in asymptomatic, LPS-challenged and non-COVID respiratory patients?</p><span class="status">In progress</span></article>
+      <article class="rq card"><span class="rq__n">RQ3</span><h3>Modality</h3><p>Does RNA add predictive information beyond surface proteins?</p><span class="status">In progress</span></article>
+      <article class="rq card"><span class="rq__n">RQ4</span><h3>Clinical translation</h3><p>Are the retained markers available in, or commonly used for, clinical flow cytometry?</p><span class="status">In progress</span></article>
+    </div>
+    <p class="disclaimer">With 76 patients and 188 candidate markers, our results are exploratory and not clinically validated.</p>
+  </div>
+  <footer class="footer">
+    <p>Data: Stephenson <em>et al.</em>, “Single-cell multi-omics analysis of the immune response in COVID-19”, <em>Nature Medicine</em> 27, 904–916 (2021).</p>
+    <p><a href="https://github.com/epfl-ada/ada2026-ada-2026-project-group-27">Project repository</a> · ADA 2026, EPFL</p>
+  </footer>
+</section>
